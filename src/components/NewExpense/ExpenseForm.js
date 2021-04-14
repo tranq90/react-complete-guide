@@ -8,8 +8,8 @@ function ExpenseForm(props) {
   //     enteredDate: "",
   //   });
   const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredAmount, setenteredAmount] = useState("");
-  const [enteredDate, setenteredDate] = useState("");
+  const [enteredAmount, setEnteredAmount] = useState("");
+  const [enteredDate, setEnteredDate] = useState("");
 
   const titleChangeHandler = (event) => {
     // setEnteredTitle(event.target.value);
@@ -23,24 +23,27 @@ function ExpenseForm(props) {
     //   setUserInput((prevState) => {
     //       return{...prevState, enteredAmount: event.target.value};
     //   })
-    setenteredAmount(event.target.value);
+    setEnteredAmount(event.target.value);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
     const expenseData = {
-        title: enteredTitle,
-        amount: enteredAmount,
-        date: new Date(enteredDate)
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
     };
+    setEnteredTitle('');
+    setEnteredAmount('');
+    setEnteredDate('');
     console.log(expenseData)
-  }
+  };
 
   const dateChangeHandler = (event) => {
     //   setUserInput((prevState) => {
     //       return{...prevState, enteredDate: event.target.value};
     //   })
-    setenteredDate(event.target.value);
+    setEnteredDate(event.target.value);
   };
 
   return (
@@ -48,11 +51,16 @@ function ExpenseForm(props) {
       <div className="new-expense__controls">
         <div className="new-expense__controls">
           <label>Title</label>
-          <input onChange={titleChangeHandler} type="text" />
+          <input
+            value={enteredTitle}
+            onChange={titleChangeHandler}
+            type="text"
+          />
         </div>
         <div className="new-expense__controls">
           <label>Amount</label>
           <input
+            value={enteredAmount}
             onChange={amountChangeHandler}
             type="number"
             min="0.01"
@@ -62,6 +70,7 @@ function ExpenseForm(props) {
         <div className="new-expense__controls">
           <label>Date</label>
           <input
+            value={enteredDate}
             onChange={dateChangeHandler}
             type="date"
             min="2019-01-01"
